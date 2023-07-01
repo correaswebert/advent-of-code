@@ -15,59 +15,54 @@ enum Outcome {
 
 fn get_shape(shape_char: char) -> Shape {
     match shape_char {
-        'A' | 'X' => return Shape::Rock,
-        'B' | 'Y' => return Shape::Paper,
-        'C' | 'Z' => return Shape::Scissors,
+        'A' | 'X' => Shape::Rock,
+        'B' | 'Y' => Shape::Paper,
+        'C' | 'Z' => Shape::Scissors,
         _ => panic!("unknown shape"),
     }
 }
 
 fn get_result(result: char) -> Outcome {
     match result {
-        'X' => return Outcome::Lose,
-        'Y' => return Outcome::Draw,
-        'Z' => return Outcome::Win,
+        'X' => Outcome::Lose,
+        'Y' => Outcome::Draw,
+        'Z' => Outcome::Win,
         _ => panic!("unknown result"),
     }
 }
 
 fn calculate_score(elf: Shape, outcome: Outcome) -> u32 {
-    let mut score = 0u32;
-
-    // match score
     match (elf, outcome) {
         (Shape::Rock, Outcome::Lose) => {
-            score += Shape::Scissors as u32 + Outcome::Lose as u32;
+            Shape::Scissors as u32 + Outcome::Lose as u32
         }
         (Shape::Rock, Outcome::Draw) => {
-            score += Shape::Rock as u32 + Outcome::Draw as u32;
+            Shape::Rock as u32 + Outcome::Draw as u32
         }
         (Shape::Rock, Outcome::Win) => {
-            score += Shape::Paper as u32 + Outcome::Win as u32;
+            Shape::Paper as u32 + Outcome::Win as u32
         }
 
         (Shape::Paper, Outcome::Lose) => {
-            score += Shape::Rock as u32 + Outcome::Lose as u32;
+            Shape::Rock as u32 + Outcome::Lose as u32
         }
         (Shape::Paper, Outcome::Draw) => {
-            score += Shape::Paper as u32 + Outcome::Draw as u32;
+            Shape::Paper as u32 + Outcome::Draw as u32
         }
         (Shape::Paper, Outcome::Win) => {
-            score += Shape::Scissors as u32 + Outcome::Win as u32;
+            Shape::Scissors as u32 + Outcome::Win as u32
         }
 
         (Shape::Scissors, Outcome::Lose) => {
-            score += Shape::Paper as u32 + Outcome::Lose as u32;
+            Shape::Paper as u32 + Outcome::Lose as u32
         }
         (Shape::Scissors, Outcome::Draw) => {
-            score += Shape::Scissors as u32 + Outcome::Draw as u32;
+            Shape::Scissors as u32 + Outcome::Draw as u32
         }
         (Shape::Scissors, Outcome::Win) => {
-            score += Shape::Rock as u32 + Outcome::Win as u32;
+            Shape::Rock as u32 + Outcome::Win as u32
         }
     }
-
-    score
 }
 
 fn main() {
